@@ -1,33 +1,31 @@
 /**
- *	File: correlationCPUCode.c
- *	Purpose: calling correlationSAPI.h for correlation.max
+ * File: correlationCPUCode.c
+ * Purpose: calling correlationSAPI.h for correlation.max
  *
- *	Correlation formula:
- *		scalar r(x,y) = (n*SUM(x,y) - SUM(x)*SUM(y))*SQRT_INVERSE(x)*SQRT_INVERSE(y)
- *		where:
- *			x,y,... 		- Time series data to be correlated
- *			n 			- window for correlation (minimum size of 2)
- *			SUM(x) 			- sum of all elements inside a window
- *			SQRT_INVERSE(x)		- 1/sqrt(n*SUM(x^2)- (SUM(x)^2))
+ * Correlation formula:
+ *	scalar r(x,y) = (n*SUM(x,y)	- SUM(x)*SUM(y))*SQRT_INVERSE(x)*SQRT_INVERSE(y)
+ *	where:
+ *		x,y,... 		- Time series data to be correlated
+ *		n 			- window for correlation (minimum size of 2)
+ *		SUM(x) 			- sum of all elements inside a window
+ *		SQRT_INVERSE(x)		- 1/sqrt(n*SUM(x^2)- (SUM(x)^2))
  *	
- *	Streams:
+ * Streams:
  *
- * 		Action 'loadLMem':
- *		------------------
- *			[in] memLoad		- content which LMem will be initialized with
+ * 	Action 'loadLMem':
+ *	------------------
+ *	[in] memLoad			- content which LMem will be initialized with
  *
+ *	Action 'default':
+ *	-----------------
+ *	[in] precalculations		- {SUM(x), SQRT_INVERSE(x)} for all timeseries for every timestep
  *
- *		Action 'default':
- *		-----------------
+ *	[in] data_pair			- {..., x[i], x[i-n], y[i], y[i-n], ... , x[i+1], x[i-n+1], y[i+1], y[i-n+1], ...} for all timeseries for every timestep; 
+ *					  IF (i-n)<0 => x[i-n]=0
  *
- *			[in] precalculations		- {SUM(x), SQRT_INVERSE(x)} for all timeseries for every timestep
+ *	[out] correlation		- numPipes * CorrelationKernel_loopLength * topScores correlations for every timestep
  *
- *			[in] data_pair			- {..., x[i], x[i-n], y[i], y[i-n], ... , x[i+1], x[i-n+1], y[i+1], y[i-n+1], ...} for all timeseries for every timestep; 
- *							IF (i-n)<0 => x[i-n]=0
- *
- *			[out] correlation		- numPipes * CorrelationKernel_loopLength * topScores correlations for every timestep
- *
- * 			[out] indices			- pair of timeseries indices for each result in correlation stream  
+ * 	[out] indices			- pair of timeseries indices for each result in correlation stream  
  *
  */
 
