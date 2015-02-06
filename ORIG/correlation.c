@@ -1,13 +1,13 @@
 /**
- *	File: correlation.c
+ * File: correlation.c
  *
- *	Correlation formula:
- *		scalar r(x,y) = (n*SUM(x,y) - SUM(x)*SUM(y))*SQRT_INVERSE(x)*SQRT_INVERSE(y)
- *		where:
- *			x,y,...			- Time series data to be correlated
- *			n			- window for correlation (minimum size of 2)
- *			SUM(x)			- sum of all elements inside a window 
- *			SQRT_INVERSE(x)		- 1/sqrt(n*SUM(x^2)- (SUM(x)^2))
+ * Correlation formula:
+ *	scalar r(x,y) = (n*SUM(x,y) 	- SUM(x)*SUM(y))*SQRT_INVERSE(x)*SQRT_INVERSE(y)
+ *	where:
+ *		x,y,...			- Time series data to be correlated
+ *		n			- window for correlation (minimum size of 2)
+ *		SUM(x)			- sum of all elements inside a window 
+ *		SQRT_INVERSE(x)		- 1/sqrt(n*SUM(x^2)- (SUM(x)^2))
  *
  */
 
