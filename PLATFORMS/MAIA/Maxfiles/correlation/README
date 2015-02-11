@@ -1,0 +1,2 @@
+File: correlation.max
+To decompress file, run: bunzip2 -dk correlation.max.bz2 
