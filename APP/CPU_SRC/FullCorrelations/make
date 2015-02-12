@@ -15,7 +15,7 @@ sources = ['correlation']
 DFE_PRJs = ['correlation']
 
 # Platform 
-platform = 'SIM'
+platform = 'SIMULATION'
 
 # Include other C projects
 C_PRJs = []

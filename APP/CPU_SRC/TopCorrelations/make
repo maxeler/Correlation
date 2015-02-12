@@ -5,8 +5,8 @@
 #                                 Custom configurations                                           #
 ###################################################################################################
 
-# Library name
-LIB_NAME = 'correlation'
+# Executable name
+EXEC_NAME = 'correlation'
 
 # Source for current project
 sources = ['correlationCpuCode']
@@ -77,7 +77,7 @@ def compile(build_dir='build', flags=cflags):
 	
 	# Compile source code
 	for source in sources:
-		run ('gcc', '-c', os.path.join(source+'.c'), '-o', os.path.join(build_dir, source+'.o'), flags.split(), inc_sapi, inc_c, MACROS.split())
+		run ('gcc', '-c', os.path.join('src',source+'.c'), '-o', os.path.join(build_dir, source+'.o'), flags.split(), inc_sapi, inc_c, MACROS.split())
 		
 
 def link (build_dir='build', flags=ldflags):
@@ -104,13 +104,13 @@ def link (build_dir='build', flags=ldflags):
 				c_abs = os.path.join(c_dir, os.path.basename(obj))
 				mapi_libs.append(c_abs)
 
-	# Make static library 
-	run ('ar', 'rcs', os.path.join(build_dir,LIB_NAME)+'.a', objects, slic_objects, mapi_libs)	
+	# Link object file and make an executable
+	run ('gcc', objects, slic_objects, mapi_libs, '-o', os.path.join(build_dir,EXEC_NAME), flags.split())	
 	
 	# Making new directory for this project and copying executable
-	mapi_dir = os.path.join(prj_root, "PLATFORMS", platform, 'MAPI', os.path.basename(os.getcwd()))
-	run ('mkdir', mapi_dir)
-	run ('cp', os.path.join(build_dir,LIB_NAME+'.a'), mapi_dir)
+	bin_dir = os.path.join(prj_root, "PLATFORMS", platform, 'binaries', os.path.basename(os.getcwd()))
+	run ('mkdir', bin_dir)
+	run ('cp', os.path.join(build_dir,EXEC_NAME), bin_dir)
 
 def clean():
 	autoclean()
