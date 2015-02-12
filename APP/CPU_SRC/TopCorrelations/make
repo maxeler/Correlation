@@ -9,7 +9,7 @@
 LIB_NAME = 'correlation'
 
 # Source for current project
-sources = ['correlation']
+sources = ['correlationCpuCode']
 
 # DFE_PRJ 
 DFE_PRJs = ['correlation']
