@@ -71,7 +71,7 @@ def compile(build_dir='build', flags=cflags):
 	
 	# Compile source code
 	for source in sources:
-		run ('gcc', '-c', os.path.join(source+'.c'), '-o', os.path.join(build_dir, source+'.o'), flags.split(), inc_sapi, inc_c, MACROS.split())
+		run ('gcc', '-c', os.path.join('src', source+'.c'), '-o', os.path.join(build_dir, source+'.o'), flags.split(), inc_sapi, inc_c, MACROS.split())
 		
 
 def link (build_dir='build', flags=ldflags):
