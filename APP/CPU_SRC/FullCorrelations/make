@@ -67,7 +67,7 @@ def compile(build_dir='build', flags=cflags):
 	inc_c = ['-I' + os.path.join(prj_root, "PLATFORMS", platform, "MAPI", c_prj) for c_prj in C_PRJs]
 	
 	# Create buld directory
-	run ('mkdir', build_dir)
+	run ('mkdir', '-p', build_dir)
 	
 	# Compile source code
 	for source in sources:
@@ -103,7 +103,7 @@ def link (build_dir='build', flags=ldflags):
 	
 	# Making new directory for this project and copying executable
 	mapi_dir = os.path.join(prj_root, "PLATFORMS", platform, 'MAPI', os.path.basename(os.getcwd()))
-	run ('mkdir', mapi_dir)
+	run ('mkdir', '-p', mapi_dir)
 	run ('cp', os.path.join(build_dir,LIB_NAME+'.a'), mapi_dir)
 
 def clean():
