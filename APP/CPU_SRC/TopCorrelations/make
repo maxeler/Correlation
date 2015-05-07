@@ -67,7 +67,7 @@ def compile(build_dir='build', flags=cflags):
 	inc_c = ['-I' + os.path.join(prj_root, "PLATFORMS", platform, "MAPI", c_prj) for c_prj in C_PRJs]
 	
 	# Create buld directory
-	run ('mkdir', build_dir)
+	run ('mkdir', '-p', build_dir)
 	
 	# Compile source code
 	for source in sources:
@@ -103,7 +103,7 @@ def link (build_dir='build', flags=ldflags):
 	
 	# Making new directory for this project and copying executable
 	bin_dir = os.path.join(prj_root, "PLATFORMS", platform, 'binaries', os.path.basename(os.getcwd()))
-	run ('mkdir', bin_dir)
+	run ('mkdir', '-p', bin_dir)
 	run ('cp', os.path.join(build_dir,EXEC_NAME), bin_dir)
 
 def clean():
