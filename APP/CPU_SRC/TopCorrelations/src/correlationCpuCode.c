@@ -201,8 +201,9 @@ int main () {
 	double* precalculations = (double*) malloc (2 * numTimeseries * numTimesteps * sizeof(double));
 	double* data_pairs = (double*) malloc (2 * numTimeseries * numTimesteps * sizeof(double));
 
-	void* in_memLoad = (void*) malloc (numBursts * 384);
-	memset(in_memLoad,0,numBursts*384);
+	int burstSize = 384/2;//For anything other than isca this should be 384
+	void* in_memLoad = (void*) malloc (numBursts * burstSize);
+	memset(in_memLoad,0,numBursts*burstSize);
 	
 	// DFE outputs
 	double* out_correlation = (double*) malloc (numTimesteps * loopLength * correlation_numTopScores * correlation_numPipes * sizeof(double));

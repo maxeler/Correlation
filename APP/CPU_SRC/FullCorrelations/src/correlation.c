@@ -136,8 +136,9 @@ void correlate (double** data, uint64_t sizeTimeseries, uint64_t numTimeseries, 
 	double* precalculations = (double*) malloc (2 * numTimeseries * numTimesteps * sizeof(double));
 	double* data_pairs = (double*) malloc (2 * numTimeseries * numTimesteps * sizeof(double));
 	
-	void* in_memLoad = (void*) malloc (numBursts * 384);
-	memset(in_memLoad,0,numBursts*384);
+	int burstSize = 384/2;//for anything other than ISCA this should be 384
+	void* in_memLoad = (void*) malloc (numBursts * burstSize);
+	memset(in_memLoad,0,numBursts*burstSize);
 
 	double* out_correlation = (double*) malloc ((numTimesteps * loopLength * correlation_numTopScores * correlation_numPipes + numBursts * 48) * sizeof(double));
 	uint32_t* out_indices = (uint32_t*) malloc (2 * numTimesteps * loopLength * correlation_numTopScores * correlation_numPipes * sizeof(uint32_t));	
